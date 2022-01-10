@@ -35,4 +35,22 @@ router.post('/', (req, res, next) => {
     Producto.create(req.body);
 });
 
+/* PUT producto */
+router.put('/', (req, res, next) => {
+    let idProducto = req.body.id;
+
+    let buscarProducto = {
+		where: { id: idProducto }
+	}
+    
+    Producto.findOne(buscarProducto)
+    .then(producto => {
+		producto.update(req.body)
+		.then(nuevoProducto => {
+			res.json(nuevoProducto);
+		})
+	});
+
+});
+
 module.exports = router;
