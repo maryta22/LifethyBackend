@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
     .catch(error => res.status(400).send(error))
 });
 
-/* GET producto por ID. */
+/* GET producto por id */
 router.get('/producto/:id', function(req, res, next) {
     Producto.findAll({
         attributes: { exclude: [ "updatedAt", "createdAt"] },
@@ -42,7 +42,7 @@ router.put('/', (req, res, next) => {
     let buscarProducto = {
 		where: { id: idProducto }
 	}
-    
+
     Producto.findOne(buscarProducto)
     .then(producto => {
 		producto.update(req.body)
@@ -51,6 +51,20 @@ router.put('/', (req, res, next) => {
 		})
 	});
 
+});
+
+/* DELETE producto */
+router.delete('/', (req, res, next) => {
+    let idProducto = req.body.id;
+
+    let buscarProducto = {
+		where: { id: idProducto }
+	}
+
+    Producto.destroy(buscarProducto)
+	.then(() => {
+		res.json('Cliente Eliminado');
+	});
 });
 
 module.exports = router;
