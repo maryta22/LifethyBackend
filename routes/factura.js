@@ -2,49 +2,49 @@ var express = require('express');
 var router = express.Router();
 
 const Sequelize = require('sequelize');
-const Producto = require('../models').producto;
+const Factura = require('../models').factura;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    Producto.findAll({
+    Factura.findAll({
         attributes: { exclude: [ "updatedAt", "createdAt"] }
     })
-    .then(productos => {
-        res.json(productos);
+    .then(facturas => {
+        res.json(facturas);
     })
     .catch(error => res.status(400).send(error))
 });
 
 /* GET producto por id */
-router.get('/producto/:id', function(req, res, next) {
-    Producto.findAll({
+router.get('/factura/:id', function(req, res, next) {
+    Factura.findAll({
         attributes: { exclude: [ "updatedAt", "createdAt"] },
         where: { id: req.params.id }
     })
-    .then(productos => {
-        res.json(productos);
+    .then(facturas => {
+        res.json(facturas);
     })
     .catch(error => res.status(400).send(error))
 });
 
 /* POST producto */
 router.post('/', (req, res, next) => {
-    Producto.create(req.body);
+    Factura.create(req.body);
 });
 
 /* PUT producto */
 router.put('/', (req, res, next) => {
-    let idProducto = req.body.id;
+    let idFactura = req.body.id;
 
-    let buscarProducto = {
-		where: { id: idProducto }
+    let buscarFactura = {
+		where: { id: idFactura }
 	}
 
-    Producto.findOne(buscarProducto)
-    .then(producto => {
-		producto.update(req.body)
-		.then(nuevoProducto => {
-			res.json(nuevoProducto);
+    Factura.findOne(buscarFactura)
+    .then(factura => {
+		factura.update(req.body)
+		.then(nuevaFactura => {
+			res.json(nuevaFactura);
 		})
 	});
 
@@ -52,13 +52,13 @@ router.put('/', (req, res, next) => {
 
 /* DELETE producto */
 router.delete('/', (req, res, next) => {
-    let idProducto = req.body.id;
+    let idFactura = req.body.id;
 
-    let buscarProducto = {
-		where: { id: idProducto }
+    let buscarFactura = {
+		where: { id: idFactura }
 	}
 
-    Producto.destroy(buscarProducto)
+    Factura.destroy(buscarFactura)
 	.then(() => {
 		res.json('Cliente Eliminado');
 	});
