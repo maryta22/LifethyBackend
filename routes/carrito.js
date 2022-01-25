@@ -2,50 +2,49 @@ var express = require('express');
 var router = express.Router();
 
 const Sequelize = require('sequelize');
-const Producto = require('../models').producto;
+const Carrito = require('../models').carrito;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    Producto.findAll({
+    Carrito.findAll({
         attributes: { exclude: [ "updatedAt", "createdAt"] }
     })
-    .then(productos => {
-        res.json(productos);
+    .then(carritos => {
+        res.json(carritos);
     })
     .catch(error => res.status(400).send(error))
 });
 
 /* GET producto por id */
-router.get('/producto/:id', function(req, res, next) {
-    
-    Producto.findAll({
+router.get('/carrito/:id', function(req, res, next) {
+    Carrito.findAll({
         attributes: { exclude: [ "updatedAt", "createdAt"] },
         where: { id: req.params.id }
     })
-    .then(productos => {
-        res.json(productos);
+    .then(carritos => {
+        res.json(carritos);
     })
     .catch(error => res.status(400).send(error))
 });
 
 /* POST producto */
 router.post('/', (req, res, next) => {
-    Producto.create(req.body);
+    Carrito.create(req.body);
 });
 
 /* PUT producto */
 router.put('/', (req, res, next) => {
-    let idProducto = req.body.id;
+    let idCarrito = req.body.id;
 
-    let buscarProducto = {
-		where: { id: idProducto }
+    let buscarCarrito = {
+		where: { id: idCarrito }
 	}
 
-    Producto.findOne(buscarProducto)
-    .then(producto => {
-		producto.update(req.body)
-		.then(nuevoProducto => {
-			res.json(nuevoProducto);
+    Carrito.findOne(buscarCarrito)
+    .then(carritos => {
+		carritos.update(req.body)
+		.then(nuevoCarrito => {
+			res.json(nuevoCarrito);
 		})
 	});
 
@@ -53,15 +52,15 @@ router.put('/', (req, res, next) => {
 
 /* DELETE producto */
 router.delete('/', (req, res, next) => {
-    let idProducto = req.body.id;
+    let idCarrito = req.body.id;
 
-    let buscarProducto = {
-		where: { id: idProducto }
+    let buscarCarrito = {
+		where: { id: idCarrito }
 	}
 
-    Producto.destroy(buscarProducto)
+    Carrito.destroy(buscarCarrito)
 	.then(() => {
-		res.json('Cliente Eliminado');
+		res.json('Carrito Eliminado');
 	});
 });
 
