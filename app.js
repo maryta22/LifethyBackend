@@ -4,12 +4,18 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
+//conexión con moongoDB
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://127.0.0.1/lifethy',{useNewUrlParser: true, useUnifiedTopology: true});
+var con = mongoose.connection;
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productoRouter = require('./routes/producto');
 var usuarioRouter = require('./routes/usuario');
 var facturaRouter = require('./routes/factura');
 var carritoRouter = require('./routes/carrito');
+var estadisticaRouter = require('./routes/estadistica');
 
 var app = express();
 app.use(cors());
@@ -26,5 +32,6 @@ app.use('/productos', productoRouter);
 app.use('/usuarios', usuarioRouter);
 app.use('/facturas', facturaRouter);
 app.use('/carritos', carritoRouter);
+app.use('/estadisticas', estadisticaRouter);
 
 module.exports = app;
