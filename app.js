@@ -6,7 +6,11 @@ var cors = require('cors');
 
 //conexión con moongoDB
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1/proyecto',{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://127.0.0.1/proyecto',{useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => console.log('Base de datos no relacional conectada!'))
+    .catch(err => {
+        console.error.bind(console, 'MongoDB connection error:')
+    });
 var con = mongoose.connection;
 
 var indexRouter = require('./routes/index');
@@ -16,6 +20,7 @@ var usuarioRouter = require('./routes/usuario');
 var facturaRouter = require('./routes/factura');
 var carritoRouter = require('./routes/carrito');
 var estadisticaRouter = require('./routes/estadisticas');
+var noRelacional = require('./routes/noRelacional');
 
 var app = express();
 
@@ -34,5 +39,6 @@ app.use('/usuarios', usuarioRouter);
 app.use('/facturas', facturaRouter);
 app.use('/carritos', carritoRouter);
 app.use('/estadisticas', estadisticaRouter);
+app.use('/norelacional', noRelacional);
 
 module.exports = app;

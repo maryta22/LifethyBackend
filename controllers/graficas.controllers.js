@@ -90,6 +90,7 @@ exports.obtenerIngresosAnuales = (req, res, next) => {
             }
         ],
         (error, documentos)=>{
+            console.log("totales")
             console.log(documentos)
             res.json(documentos)
         }
