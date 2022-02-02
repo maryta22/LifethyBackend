@@ -21,9 +21,10 @@ var facturaRouter = require('./routes/factura');
 var carritoRouter = require('./routes/carrito');
 var estadisticaRouter = require('./routes/estadisticas');
 var noRelacional = require('./routes/noRelacional');
+var ciudadesRouter = require('./routes/ciudades');
+var contactanosRouter = require('./routes/contactanos');
 
 var app = express();
-
 app.use(cors());
 
 app.use(logger('dev'));
@@ -40,5 +41,7 @@ app.use('/facturas', facturaRouter);
 app.use('/carritos', carritoRouter);
 app.use('/estadisticas', estadisticaRouter);
 app.use('/norelacional', noRelacional);
+app.use('/ciudades', ciudadesRouter);
+app.use('/contactanos', contactanosRouter);
 
 module.exports = app;
