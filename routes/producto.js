@@ -1,68 +1,22 @@
 var express = require('express');
+const { enviarFacturas } = require('../controllers/factura.controller');
+const { obtenerProducto, obtenerProductoPorId, modificarProducto, eliminarProducto, enviarProducto } = require('../controllers/producto.controller');
 var router = express.Router();
 
-const Sequelize = require('sequelize');
-const Producto = require('../models').producto;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    Producto.findAll({
-        attributes: { exclude: [ "updatedAt", "createdAt"] }
-    })
-    .then(productos => {
-        res.json(productos);
-    })
-    .catch(error => res.status(400).send(error))
-});
+router.get('/', obtenerProducto);
 
 /* GET producto por id */
-router.get('/producto/:id', function(req, res, next) {
-    
-    Producto.findAll({
-        attributes: { exclude: [ "updatedAt", "createdAt"] },
-        where: { id: req.params.id }
-    })
-    .then(productos => {
-        res.json(productos);
-    })
-    .catch(error => res.status(400).send(error))
-});
+router.get('/producto/:id', obtenerProductoPorId );
 
 /* POST producto */
-router.post('/', (req, res, next) => {
-    Producto.create(req.body);
-});
+router.post('/', enviarProducto);
 
 /* PUT producto */
-router.put('/', (req, res, next) => {
-    let idProducto = req.body.id;
-
-    let buscarProducto = {
-		where: { id: idProducto }
-	}
-
-    Producto.findOne(buscarProducto)
-    .then(producto => {
-		producto.update(req.body)
-		.then(nuevoProducto => {
-			res.json(nuevoProducto);
-		})
-	});
-
-});
+router.put('/', modificarProducto);
 
 /* DELETE producto */
-router.delete('/', (req, res, next) => {
-    let idProducto = req.body.id;
-
-    let buscarProducto = {
-		where: { id: idProducto }
-	}
-
-    Producto.destroy(buscarProducto)
-	.then(() => {
-		res.json('Cliente Eliminado');
-	});
-});
+router.delete('/', eliminarProducto);
 
 module.exports = router;
