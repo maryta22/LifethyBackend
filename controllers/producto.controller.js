@@ -1,13 +1,17 @@
 const Producto = require('../models').producto;
+const Descuento = require('../models').descuento;
 
 exports.obtenerProducto = (req, res, next) => {
     Producto.findAll({
-        attributes: { exclude: [ "updatedAt", "createdAt"] }
+        attributes: { exclude: [ "updatedAt", "createdAt"] },
+        include: [{model : Descuento, as: "descuento", attributes: { exclude: [ "updatedAt", "createdAt"] },}]
     })
     .then(productos => {
         res.json(productos);
     })
-    .catch(error => res.status(400).send(error))
+    .catch(error => {
+        console.log(error)
+        res.status(400).send(error)})
 }
 
 exports.obtenerProductoPorId = function(req, res, next) {

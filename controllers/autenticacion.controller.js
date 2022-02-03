@@ -17,7 +17,13 @@ exports.iniciarSesion = async(req, res, next) =>{
             rol : cuenta.idRol
         })
 
-        return res.json({token : token})
+        return res.json({token : token, user:{
+            id: cuenta.id,
+            rol: cuenta.idRol,
+            nombre: cuenta.nombre,
+            apellido: cuenta.apellido,
+            correo: cuenta.correo
+        }})
     }else{
         return res.status(404).json({
             status: 404,

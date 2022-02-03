@@ -24,14 +24,6 @@ module.exports = {
                key: 'id'
         }
       },
-      idInventario: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { 
-               model: 'inventarios',
-               key: 'id'
-        }
-      },
       nombre: {
         type: Sequelize.STRING
       },

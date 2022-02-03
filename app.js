@@ -23,6 +23,8 @@ var noRelacional = require('./routes/noRelacional');
 var ciudadesRouter = require('./routes/ciudades');
 var contactanosRouter = require('./routes/contactanos');
 var autenticacionRouter = require('./routes/autenticacion');
+var comentarioProductoRouter = require('./routes/productocomentario');
+
 
 var app = express();
 app.use(cors());
@@ -36,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/', autenticacionRouter);
 app.use('/productos', productoRouter);
+app.use('/productos/comentarios',comentarioProductoRouter)
 app.use('/usuarios', usuarioRouter);
 app.use('/facturas', facturaRouter);
 app.use('/carritos', carritoRouter);

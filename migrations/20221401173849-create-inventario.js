@@ -18,7 +18,15 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      idProducto: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { 
+               model: 'productos',
+               key: 'id'
+        }
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
