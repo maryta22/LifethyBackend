@@ -60,7 +60,7 @@ exports.obtenerTiposDePago = (req,res,next) => {
         ],
         (error, documentos)=>{
             console.log(documentos)
-            res.json(documentos)
+            return res.json(documentos)
         }
     )
 }
@@ -92,7 +92,7 @@ exports.obtenerIngresosAnuales = (req, res, next) => {
         (error, documentos)=>{
             console.log("totales")
             console.log(documentos)
-            res.json(documentos)
+            return res.json(documentos)
         }
     )
 }
