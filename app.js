@@ -23,6 +23,7 @@ var estadisticaRouter = require('./routes/estadisticas');
 var noRelacional = require('./routes/noRelacional');
 var ciudadesRouter = require('./routes/ciudades');
 var contactanosRouter = require('./routes/contactanos');
+var autenticacionRouter = require('./routes/autenticacion');
 
 var app = express();
 app.use(cors());
@@ -34,6 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/', autenticacionRouter);
 app.use('/users', usersRouter);
 app.use('/productos', productoRouter);
 app.use('/usuarios', usuarioRouter);
@@ -43,5 +45,6 @@ app.use('/estadisticas', estadisticaRouter);
 app.use('/norelacional', noRelacional);
 app.use('/ciudades', ciudadesRouter);
 app.use('/contactanos', contactanosRouter);
+
 
 module.exports = app;
