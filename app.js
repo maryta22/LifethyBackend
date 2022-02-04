@@ -24,6 +24,7 @@ var ciudadesRouter = require('./routes/ciudades');
 var contactanosRouter = require('./routes/contactanos');
 var autenticacionRouter = require('./routes/autenticacion');
 var comentarioProductoRouter = require('./routes/productocomentario');
+var reportesRouter = require('./routes/reportes')
 
 
 var app = express();
@@ -46,6 +47,7 @@ app.use('/estadisticas', estadisticaRouter);
 app.use('/norelacional', noRelacional);
 app.use('/ciudades', ciudadesRouter);
 app.use('/contactanos', contactanosRouter);
+app.use('/reportes', reportesRouter);
 
 
 module.exports = app;
